@@ -17,6 +17,7 @@ import static org.quartz.DateBuilder.*;
 public class Test {
 
 	public static void main(String[] args) throws SchedulerException, InterruptedException {
+		// 运行依赖 puartz.properties 配置
 		SchedulerFactory sf = new StdSchedulerFactory();
 		Scheduler sched = sf.getScheduler();
 		
