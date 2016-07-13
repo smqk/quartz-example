@@ -1,4 +1,4 @@
-package org.smqk.quartz.example1.test;
+package org.smqk.quartz.example2;
 
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -10,7 +10,7 @@ import static org.quartz.JobBuilder.*;
 import static org.quartz.TriggerBuilder.*;
 import static org.quartz.SimpleScheduleBuilder.*;
 
-public class QuartzTest {
+public class Test {
 	public static void main(String[] args) {
 		
 		// 运行依赖 puartz.properties 配置
