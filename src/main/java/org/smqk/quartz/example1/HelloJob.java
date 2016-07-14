@@ -13,7 +13,7 @@ public class HelloJob implements Job{
 
 	private static Logger log = LoggerFactory.getLogger(HelloJob.class);
 	
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:ss:SSS");
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS");
 	
 	private static int staticVar = 0;
 	

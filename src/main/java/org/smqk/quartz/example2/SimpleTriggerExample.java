@@ -26,19 +26,10 @@ import java.util.Date;
  * @author smqk
  */
 public class SimpleTriggerExample {
-
-	/**
-	 * 格式化日期显示
-	 * 
-	 * @param date
-	 * @return
-	 */
-	public String formatDate(Date date){
-		return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS").format(date);
-	}
 	
 	public void run() throws Exception {
 		Logger log = LoggerFactory.getLogger(SimpleTriggerExample.class);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS");
 
 		log.info("------- Initializing -------------------");
 
@@ -50,12 +41,10 @@ public class SimpleTriggerExample {
 
 		log.info("------- Scheduling Jobs ----------------");
 
-		// jobs can be scheduled before sched.start() has been called
-
 		// get a "nice round" time a few seconds in the future...
-		log.debug("currentDate:"+formatDate(new Date()));
+		log.debug("currentDate:"+sdf.format(new Date()));
 		Date startTime = DateBuilder.nextGivenSecondDate(null, 15);
-		log.debug("startDate:"+formatDate(startTime));
+		log.debug("startDate:"+sdf.format(startTime));
 
 		// job1 任务仅会执行一次
 		JobDetail job = newJob(SimpleJob.class).withIdentity("job1", "group1").build();
@@ -63,7 +52,7 @@ public class SimpleTriggerExample {
 
 		// schedule it to run!
 		Date ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -73,7 +62,7 @@ public class SimpleTriggerExample {
 		trigger = (SimpleTrigger) newTrigger().withIdentity("trigger2", "group1").startAt(startTime).build();
 
 		ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -84,7 +73,7 @@ public class SimpleTriggerExample {
 				.withSchedule(simpleSchedule().withIntervalInSeconds(10).withRepeatCount(10)).build();
 
 		ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -94,7 +83,7 @@ public class SimpleTriggerExample {
 				.withSchedule(simpleSchedule().withIntervalInSeconds(10).withRepeatCount(2)).forJob(job).build();
 
 		ft = sched.scheduleJob(trigger);
-		log.info(job.getKey() + " 任务(同样的)将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务(同样的)将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 		
@@ -106,7 +95,7 @@ public class SimpleTriggerExample {
 				.withSchedule(simpleSchedule().withIntervalInSeconds(10).withRepeatCount(5)).build();
 
 		ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -118,7 +107,7 @@ public class SimpleTriggerExample {
 				.startAt(futureDate(5, IntervalUnit.MINUTE)).build();
 
 		ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -130,7 +119,7 @@ public class SimpleTriggerExample {
 				.withSchedule(simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
 
 		ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -151,7 +140,7 @@ public class SimpleTriggerExample {
 				.withSchedule(simpleSchedule().withIntervalInMinutes(5).withRepeatCount(20)).build();
 
 		ft = sched.scheduleJob(job, trigger);
-		log.info(job.getKey() + " 任务将在: " + formatDate(ft) + " 时执行 ，重复执行  "
+		log.info(job.getKey() + " 任务将在: " + sdf.format(ft) + " 时执行 ，重复执行  "
 				+ trigger.getRepeatCount() + " 次, 每次间隔 "
 				+ trigger.getRepeatInterval() / 1000 + " 秒");
 
@@ -191,8 +180,9 @@ public class SimpleTriggerExample {
 		}
 
 		log.info("------- Shutting Down ---------------------");
-
+		//一旦停止的调度器，不能再重写启动
 		sched.shutdown(true);
+		//sched.start(); //重启动调度器将抛出异常 org.quartz.SchedulerException: The Scheduler cannot be restarted after shutdown() has been called.
 
 		log.info("------- Shutdown Complete -----------------");
 

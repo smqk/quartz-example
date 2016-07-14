@@ -1,5 +1,4 @@
- 
-package org.smqk.quartz.example2;
+package org.smqk.quartz.example3;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
